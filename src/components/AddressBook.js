@@ -21,7 +21,8 @@ function AddressBook(){
     return(
         <div>
               
-                {addresses.map(user => {
+            {
+                addresses.map(user => {
                     return (
                         <div key={user.id} className="card">
                             <h3> {user.name}</h3>
@@ -32,6 +33,10 @@ function AddressBook(){
 
                             <button className="address-btn" onClick={() => {removeAddress(user)}}>Delete</button>
                             <button className="address-btn"onClick={() => {viewOnMap(user)}}>Map</button>
+                            <div>
+                                <Link to={`user/${user.id}`} target="_blank" >{user.name}</Link>
+                                
+                                </div>
                         </div>
                     )
                 })
