@@ -33,7 +33,7 @@ function AddAddressForm(){
 <div>
 
             <label htmlFor='addressInput'>Address</label>
-            <input id='addressInput' type='text' name='address' value={formData.address} onChange={handleChange} />
+            <input id='addressInput' type='text' name='address' value={formData.address.street} onChange={handleChange} />
 </div>
             
             <input type="submit" />

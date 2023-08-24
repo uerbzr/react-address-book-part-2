@@ -6,12 +6,17 @@ import DataContext from './DataContext'
 import AddressBookItem from './components/AddressBookItem';
 import AddAddressForm from './components/AddAddressForm';
 function App() {
-    const[addresses, setAddresses] = useState([
-        {id: 1, name: 'Nigel', address: 'Bournemouth'},
-        {id: 2, name: 'Clifford', address: 'USA'},
-        {id: 3, name: 'Bluey', address: 'Sweden'}
-    ])
+    const[addresses, setAddresses] = useState([])
 
+    async function getUserData() {
+        const url = `https://jsonplaceholder.typicode.com/users`
+        const response = await fetch(url)
+        const json = await response.json()
+        setAddresses(json)
+      }
+      useEffect(() => {        
+        getUserData();
+      }, []) 
 
     
     

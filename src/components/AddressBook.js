@@ -5,33 +5,34 @@ import { Link } from "react-router-dom"
 function AddressBook(){
     const { addresses, setAddresses } = useContext(DataContext)
     
-    const viewOnMap = (id) => {
-        let URL = 'http://maps.google.com/maps?z=12&t=m&q=loc:38.9419+-78.3020'
+    const viewOnMap = (user) => {
+        let URL = `http://maps.google.com/maps?z=12&t=m&q=loc:+${user.address.geo.lat}+${user.address.geo.lng}`
+        console.log(URL)
 
     }
 
-    const removeAddress = (id) => {
+    const removeAddress = (user) => {
       
        setAddresses(oldValues => {
-        return oldValues.filter(a => a.id !== id)
+        return oldValues.filter(a => a.id !== user.id)
        })
     }
     console.log('addresses',addresses)
     return(
         <div>
               
-                {addresses.map(address => {
+                {addresses.map(user => {
                     return (
-                        
-                        <p key={address.id}>
-                            {address.name}&nbsp;
-                            ({address.address})
-                            &nbsp;&nbsp;
-                            <button onClick={() => {removeAddress(address.id)}}>Delete</button>
-                            <button onClick={() => {viewOnMap(address.id)}}>Map</button>
-                           
-                           
-                        </p>
+                        <div key={user.id} className="card">
+                            <h3> {user.name}</h3>
+                            <p>
+                                <small>{user.address.suite}, {user.address.street}, {user.address.city}, {user.address.zipcode}</small>
+                            </p>
+                       
+
+                            <button className="address-btn" onClick={() => {removeAddress(user)}}>Delete</button>
+                            <button className="address-btn"onClick={() => {viewOnMap(user)}}>Map</button>
+                        </div>
                     )
                 })
             }
